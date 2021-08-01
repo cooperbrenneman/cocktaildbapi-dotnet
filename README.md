@@ -43,6 +43,8 @@ catch (CocktailAPIException ex)
 If for whatever reason you need to update the API Key after creating an instance of a CocktailAPI, you can call the `UpdateApiKey` method and pass in the new `apiKey` as the argument.
 
 ### Methods
+If at any time the method is unable to find a particular drink, drink summary, ingredient, or filter, the response will be `null`.
+
 #### Drinks
 | Method Name                   	| Parameter          	| Description                               	| Return Type   	| Allows Test API Key 	|
 |-------------------------------	|--------------------	|-------------------------------------------	|---------------	|---------------------	|
@@ -50,7 +52,7 @@ If for whatever reason you need to update the API Key after creating an instance
 | `GetLatestDrinksAsync`        	|                    	| List most latest cocktails                	| `List<Drink>` 	| `false`             	|
 | `GetPopularDrinksAsync`       	|                    	| List Popular cocktails                    	| `List<Drink>` 	| `false`             	|
 | `GetRandomDrinkAsync`         	|                    	| Lookup a random cocktail                  	| `Drink`       	| `true`              	|
-| `GetTenRandomDrinksAsync`     	|                    	| Lookup a selection of 10 random cocktails 	| `List<Drink>` 	| `true`              	|
+| `GetTenRandomDrinksAsync`     	|                    	| Lookup a selection of 10 random cocktails 	| `List<Drink>` 	| `false`              	|
 | `GetDrinksByNameAsync`        	| `string` name      	| Search cocktail by name                   	| `List<Drink>` 	| `true`              	|
 | `GetDrinksByFirstLetterAsync` 	| `char` firstLetter 	| List all cocktails by first letter        	| `List<Drink>` 	| `true`              	|
 
@@ -120,7 +122,7 @@ var alcoholic = drink.Alcoholic;
 
 <summary><code>GetTenRandomDrinksAsync()</code></summary>
 
-This method lists ten random drinks and returns a `List<Drinks>`.
+This method lists ten random drinks and returns a `List<Drinks>`. Note that the Test API key will not work for this endpoint and will return a `NotSupportedException`.
 
 ```csharp
 var drinks = await api.GetTenRandomDrinksAsync();
